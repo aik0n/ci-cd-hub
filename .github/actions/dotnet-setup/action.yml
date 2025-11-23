@@ -19,7 +19,9 @@ runs:
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
         cache: ${{ inputs.cache-dependencies == 'true' }}
-        cache-dependency-path: '**/packages.lock.json'
+        cache-dependency-path: |
+          **/*.csproj
+          **/nuget.config
     
     - name: Display .NET info
       shell: bash
