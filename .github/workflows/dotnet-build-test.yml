@@ -98,7 +98,7 @@ jobs:
         if: inputs.run-tests
         uses: aik0n/ci-cd-hub/.github/actions/dotnet-test@main
         with:
-          project-path: ${{ inputs.test-project-path }}
+          test-project-path: ${{ inputs.test-project-path }}
           configuration: ${{ inputs.build-configuration }}
           no-build: 'true'
           collect-coverage: ${{ inputs.collect-coverage }}
