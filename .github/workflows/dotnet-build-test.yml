@@ -31,6 +31,7 @@ on:
       test-verbosity:
         description: 'Test verbosity level'
         required: false
+        type: string
         default: 'normal'
       collect-coverage:
         description: 'Collect code coverage'
