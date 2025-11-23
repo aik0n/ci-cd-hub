@@ -43,7 +43,7 @@ runs:
         echo "Running tests for: ${{ inputs.test-project-path }}"
         
         TEST_ARGS="--configuration ${{ inputs.configuration }} --verbosity ${{ inputs.verbosity }}"
-        TEST_ARGS="$TEST_ARGS --logger trx;LogFileName=test-results.trx"
+        TEST_ARGS="$TEST_ARGS --logger \"trx;LogFileName=test-results.trx\""
         TEST_ARGS="$TEST_ARGS --results-directory ./TestResults"
         
         if [ "${{ inputs.no-build }}" == "true" ]; then
@@ -51,14 +51,14 @@ runs:
         fi
         
         if [ "${{ inputs.collect-coverage }}" == "true" ]; then
-          TEST_ARGS="$TEST_ARGS --collect:'XPlat Code Coverage'"
+          TEST_ARGS="$TEST_ARGS --collect:\"XPlat Code Coverage\""
         fi
         
         if [ -n "${{ inputs.test-filter }}" ]; then
-          TEST_ARGS="$TEST_ARGS --filter '${{ inputs.test-filter }}'"
+          TEST_ARGS="$TEST_ARGS --filter \"${{ inputs.test-filter }}\""
         fi
         
-        dotnet test $TEST_ARGS
+        eval dotnet test $TEST_ARGS
         
         echo "results-path=./TestResults" >> $GITHUB_OUTPUT
     
