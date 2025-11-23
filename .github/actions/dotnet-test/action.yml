@@ -39,26 +39,27 @@ runs:
       id: test
       shell: bash
       working-directory: ${{ inputs.test-project-path }}
-      run: |
-        echo "Running tests for: ${{ inputs.test-project-path }}"
-        
-        TEST_ARGS="--configuration ${{ inputs.configuration }} --verbosity ${{ inputs.verbosity }}"
-        TEST_ARGS="$TEST_ARGS --logger \"trx;LogFileName=test-results.trx\""
-        TEST_ARGS="$TEST_ARGS --results-directory ./TestResults"
-        
+      run: |     
+        TEST_ARGS=(
+          "--configuration" "${{ inputs.configuration }}"
+          "--verbosity" "${{ inputs.verbosity }}"
+          "--logger" "trx;LogFileName=test-results.trx"
+          "--results-directory" "./TestResults"
+        )
+
         if [ "${{ inputs.no-build }}" == "true" ]; then
-          TEST_ARGS="$TEST_ARGS --no-build"
+          TEST_ARGS+=("--no-build")
         fi
-        
+
         if [ "${{ inputs.collect-coverage }}" == "true" ]; then
-          TEST_ARGS="$TEST_ARGS --collect:\"XPlat Code Coverage\""
+          TEST_ARGS+=("--collect:XPlat Code Coverage")
         fi
-        
+
         if [ -n "${{ inputs.test-filter }}" ]; then
-          TEST_ARGS="$TEST_ARGS --filter \"${{ inputs.test-filter }}\""
+          TEST_ARGS+=("--filter" "${{ inputs.test-filter }}")
         fi
-        
-        dotnet test $TEST_ARGS
+
+        dotnet test "${TEST_ARGS[@]}"
         
         echo "results-path=./TestResults" >> $GITHUB_OUTPUT
     
