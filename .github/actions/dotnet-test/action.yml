@@ -58,7 +58,7 @@ runs:
           TEST_ARGS="$TEST_ARGS --filter \"${{ inputs.test-filter }}\""
         fi
         
-        eval dotnet test $TEST_ARGS
+        dotnet test $TEST_ARGS
         
         echo "results-path=./TestResults" >> $GITHUB_OUTPUT
     
