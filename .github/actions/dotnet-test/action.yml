@@ -68,4 +68,6 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: test-results-${{ github.run_number }}
-        path: ${{ inputs.test-project-path }}/TestResults/**/*
+        path: |
+          TestResults/**/*.trx
+          TestResults/**/*.xml
