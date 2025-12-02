@@ -106,7 +106,7 @@ jobs:
           test-project-path: ${{ inputs.test-project-path }}
           configuration: ${{ inputs.build-configuration }}
           test-verbosity: ${{ inputs.test-verbosity }}
-          no-build: 'true'
+          no-build: 'false'
           collect-coverage: ${{ inputs.collect-coverage }}
           test-filter: ${{ inputs.test-filter }}
       
