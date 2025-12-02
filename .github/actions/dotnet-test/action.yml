@@ -38,13 +38,13 @@ runs:
     - name: Run tests
       id: test
       shell: bash
-      working-directory: ${{ inputs.test-project-path }}
       run: |     
         TEST_ARGS=(
+          "${{ inputs.test-project-path }}"
           "--configuration" "${{ inputs.configuration }}"
           "--verbosity" "${{ inputs.test-verbosity }}"
           "--logger" "trx;LogFileName=test-results.trx"
-          "--results-directory" "./TestResults"
+          "--results-directory" "${{ github.workspace }}/TestResults"
         )
 
         if [ "${{ inputs.no-build }}" == "true" ]; then
