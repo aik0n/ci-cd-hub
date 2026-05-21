@@ -20,7 +20,7 @@ if ($envName -eq "Production") {
 }
 elseif ($envName -eq "Stage") {
     # Use TeamCity's build number
-    $buildNumber = "1.0.$BuildCounter"
+    $buildNumber = "$BuildCounter-build-number"
     Write-Host "Using TeamCity Build Number: $buildNumber"
 
     # Set TeamCity parameter
