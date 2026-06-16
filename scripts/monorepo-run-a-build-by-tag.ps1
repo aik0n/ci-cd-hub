@@ -19,7 +19,14 @@ $HEADERS = @{
 function Trigger-Build {
     param([string]$BuildConfigId)
 
-    $BODY = "<build branchName=`"$BRANCH`"><buildType id=`"$BuildConfigId`"/></build>"
+$BODY = @"
+<build branchName="$BRANCH">
+    <buildType id="$BuildConfigId"/>
+    <properties>
+        <property name="env.TAG_EXTERNAL" value="$TAG"/>
+    </properties>
+</build>
+"@
 
     try {
         $RESPONSE = Invoke-RestMethod `
